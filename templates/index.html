@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drawing Web App</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        #canvas-container {
+            text-align: center;
+            background-color: #ffffff; /* White canvas container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        }
+        h1 {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333333; /* Dark gray text color */
+            margin-bottom: 20px;
+        }
+        canvas {
+            border: 1px solid #cccccc; /* Light gray canvas border */
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #007bff; /* Blue button color */
+            color: #ffffff; /* White text color */
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+        #text-input {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold; color: #333333;">FRAMES</h1>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <div>
+            <label for="color">Select color:</label>
+            <input type="color" id="color" value="#000000">
+        </div>
+        <button class="btn" onclick="clearCanvas()">Clear</button>
+        <input type="text" id="text-input" placeholder="Enter text">
+        <button class="btn" onclick="drawText()">Add Text</button>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var colorInput = document.getElementById('color');
+        var textInput = document.getElementById('text-input');
+
+        var painting = false;
+
+        canvas.addEventListener('mousedown', startPainting);
+        canvas.addEventListener('mouseup', stopPainting);
+        canvas.addEventListener('mousemove', draw);
+
+        function startPainting(event) {
+            painting = true;
+            draw(event);
+        }
+
+        function stopPainting() {
+            painting = false;
+        }
+
+        function draw(event) {
+            if (!painting) return;
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = colorInput.value;
+
+            ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawText() {
+            var text = textInput.value;
+            ctx.font = '20px Arial';
+            ctx.fillStyle = colorInput.value;
+            ctx.fillText(text, 50, 50); // Adjust the position as needed
+        }
+    </script>
+</body>
+</html>

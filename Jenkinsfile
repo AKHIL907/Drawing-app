@@ -4,7 +4,7 @@ pipeline {
     environment {
         REPO_URL = 'https://github.com/AKHIL907/Drawing-app.git'
         DOCKER_IMAGE = 'akhil0531/drawing_pannel'
-        REMOTE_HOST = 'ubuntu@18.118.164.45'
+        REMOTE_HOST = 'ubuntu@3.16.156.19'
         SSH_CREDENTIALS = 'ssh-agent'
         SSH_OPTS = '-o StrictHostKeyChecking=no'
     }

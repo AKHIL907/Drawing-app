@@ -40,10 +40,10 @@ pipeline {
                 sh 'docker push ${DOCKER_IMAGE}'
             }
         }
-        stage('List Files on Remote') {
+        stage('checking Docker installed or not ') {
             steps {
                 sshagent([SSH_CREDENTIALS]) {
-                    sh "ssh ${SSH_OPTS} ${REMOTE_HOST} 'ls -la'"
+                    sh "ssh ${SSH_OPTS} ${REMOTE_HOST} 'docker --version'"
                 }
             }
         }

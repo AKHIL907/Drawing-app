@@ -1,5 +1,6 @@
 # Drawing-app
 Creating a drawing frame using python flask and deploy in ec2 instance and automate the deployment using cicd jenkins.
+By using docker containerised the python app tn it deploy on ec2 as container
 
 
 
